@@ -10,7 +10,38 @@ export class CdkStarterStack extends cdk.Stack {
     const api = new apigateway.RestApi(this, 'api', {
       description: 'example api gateway',
       deployOptions: {
-        stageName: 'dev',
+        // this enables caching on our api gateway, with a ttl of five minutes (unless overridden per method)
+        cachingEnabled: true,
+        cacheClusterEnabled: true,
+        cacheDataEncrypted: true,
+        stageName: "dev",
+        dataTraceEnabled: true,
+        cacheTtl: cdk.Duration.minutes(5),
+        throttlingBurstLimit: 100,
+        throttlingRateLimit: 100,
+        tracingEnabled: true,
+        metricsEnabled: true,
+        // Method deployment options for specific resources/methods. (override common options defined in `StageOptions#methodOptions`)
+        methodOptions: {
+            "/todos/GET": {
+                throttlingRateLimit: 10,
+                throttlingBurstLimit: 10,
+                cacheDataEncrypted: true,
+                cachingEnabled: true,
+                cacheTtl: cdk.Duration.minutes(10),
+                dataTraceEnabled: true,
+                metricsEnabled: true,
+            },
+            "/todos/{todoId}/GET": {
+                throttlingRateLimit: 20,
+                throttlingBurstLimit: 20,
+                cachingEnabled: true,
+                cacheDataEncrypted: true,
+                cacheTtl: cdk.Duration.minutes(1),
+                dataTraceEnabled: true,
+                metricsEnabled: true,
+            },
+        },
       },
       // 👇 enable CORS
       defaultCorsPreflightOptions: {
