@@ -1,9 +1,51 @@
+## Update
+
 # API Gateway Example in AWS CDK - Complete Guide
 
 A repository for an article on
 [bobbyhadz.com](https://bobbyhadz.com/blog/aws-cdk-api-gateway-example)
 
 > If you use CDK v1, switch to the cdk-v1 branch
+>
+# Creating The API GATEWAY
+
+Reference the file lib/cdk-starter-stack.ts
+
+We created an API Gateway by instantiating the RestApi class.
+We passed the following props to the RestApi construct:
+description - a short description of the API Gateway resource
+
+deployOptions - options for the deployment stage of the API. We updated the stage name of the API to dev. By default, the stageName is set to prod. The name of the stage is used in the API URL.
+
+Inside of the deploy Options, there is a defintion methodOptions:
+
+We will use these options to define settings for the endpoint that can be referenced inside of the gateway console.
+For this repo I decided to set the throttling and burst limit for each endpoint at 10.
+
+        methodOptions: {
+          "/todos/GET": {
+            throttlingRateLimit: 10,
+            throttlingBurstLimit: 10,
+            cacheDataEncrypted: true,
+            cachingEnabled: true,
+            cacheTtl: cdk.Duration.minutes(10),
+            loggingLevel: apigw.MethodLoggingLevel.INFO,
+            dataTraceEnabled: true,
+            metricsEnabled: true,
+          },
+          "/todos/{todoId}/GET": {
+            throttlingRateLimit: 20,
+            throttlingBurstLimit: 20,
+            cachingEnabled: true,
+            cacheDataEncrypted: true,
+            cacheTtl: cdk.Duration.minutes(1),
+            loggingLevel: apigw.MethodLoggingLevel.INFO,
+            dataTraceEnabled: true,
+            metricsEnabled: true,
+          },
+        },
+
+# For more background reference please refer to this repo
 
 ## How to Use
 
