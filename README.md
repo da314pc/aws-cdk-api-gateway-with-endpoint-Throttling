@@ -1,12 +1,5 @@
 ## Update
 
-# API Gateway Example in AWS CDK - Complete Guide
-
-A repository for an article on
-[bobbyhadz.com](https://bobbyhadz.com/blog/aws-cdk-api-gateway-example)
-
-> If you use CDK v1, switch to the cdk-v1 branch
->
 # Creating The API GATEWAY
 
 Reference the file lib/cdk-starter-stack.ts
@@ -45,7 +38,7 @@ For this repo I decided to set the throttling and burst limit for each endpoint 
           },
         },
 
-# For more background reference please refer to this repo
+# [For more background reference please refer to this repo](https://github.com/bobbyhadz/aws-cdk-api-gateway-example)
 
 ## How to Use
 
