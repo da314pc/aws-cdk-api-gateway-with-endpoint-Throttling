@@ -16,26 +16,24 @@ We will use these options to define settings for the endpoint that can be refere
 For this repo I decided to set the throttling and burst limit for each endpoint at 10.
 
         methodOptions: {
-          "/todos/GET": {
-            throttlingRateLimit: 10,
-            throttlingBurstLimit: 10,
-            cacheDataEncrypted: true,
-            cachingEnabled: true,
-            cacheTtl: cdk.Duration.minutes(10),
-            loggingLevel: apigw.MethodLoggingLevel.INFO,
-            dataTraceEnabled: true,
-            metricsEnabled: true,
-          },
-          "/todos/{todoId}/GET": {
-            throttlingRateLimit: 20,
-            throttlingBurstLimit: 20,
-            cachingEnabled: true,
-            cacheDataEncrypted: true,
-            cacheTtl: cdk.Duration.minutes(1),
-            loggingLevel: apigw.MethodLoggingLevel.INFO,
-            dataTraceEnabled: true,
-            metricsEnabled: true,
-          },
+            "/todos/GET": {
+                throttlingRateLimit: 10,
+                throttlingBurstLimit: 10,
+                cacheDataEncrypted: true,
+                cachingEnabled: true,
+                cacheTtl: cdk.Duration.minutes(10),
+                dataTraceEnabled: true,
+                metricsEnabled: true,
+            },
+            "/todos/{todoId}/GET": {
+                throttlingRateLimit: 20,
+                throttlingBurstLimit: 20,
+                cachingEnabled: true,
+                cacheDataEncrypted: true,
+                cacheTtl: cdk.Duration.minutes(1),
+                dataTraceEnabled: true,
+                metricsEnabled: true,
+            },
         },
 
 # [For more background reference please refer to this repo](https://github.com/bobbyhadz/aws-cdk-api-gateway-example)
